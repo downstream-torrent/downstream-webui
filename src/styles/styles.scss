@@ -1,3 +1,16 @@
+// Colours
+$white: white;
+$lightest-grey: #fafafa;
+$lighter-grey: #efefef;
+$light-grey: #dedede;
+$lightish-grey: #a0a0a0;
+$medium-grey: #808080;
+$dark-grey: #606060;
+$darker-grey: #404040;
+$blue: #53c2e0;
+$red: #eb4d82;
+$green: #6fde7c;
+
 // Mixins
 @mixin box-sizing () {
   -webkit-box-sizing: border-box;

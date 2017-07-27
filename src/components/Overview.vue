@@ -35,6 +35,9 @@
         {{$store.state.connect}}
       </div>
     </div>
+    <div class="footer">
+      <span>Made with <i class="fa fa-heart heart"></i> by Brendan Goodenough</span>
+    </div>
   </div>
 </template>
 
@@ -58,13 +61,13 @@ export default {
   display: flex;
   width: 100%;
   height: 60px;
-  background: #efefef;
-  border-bottom: 1px solid #dedede;
+  background: $lighter-grey;
+  border-bottom: 1px solid $light-grey;
   @include box-sizing;
 
   .title {
     width: 180px;
-    color: #808080;
+    color: $medium-grey;
     font-size: 18px;
     font-weight: 400;
     line-height: 30px;
@@ -84,10 +87,10 @@ export default {
   button {
     height: 30px;
     padding: 0 15px;
-    background: #fafafa;
-    color: #606060;
+    background: $lightest-grey;
+    color: $dark-grey;
     font-size: 12px;
-    border: 1px solid #dedede;
+    border: 1px solid $light-grey;
     border-radius: 5px;
     outline: none;
     cursor: pointer;
@@ -97,7 +100,7 @@ export default {
     }
 
     &:hover {
-      background: #efefef;
+      background: $lighter-grey;
     }
   }
 }
@@ -109,31 +112,31 @@ export default {
 
 .left-sidebar {
   width: 180px;
-  background: #fafafa;
-  border-right: 1px solid #dedede;
+  background: $lightest-grey;
+  border-right: 1px solid $light-grey;
   padding: 15px;
 
   .section {
     margin-bottom: 15px;
 
     .section-title {
-      color: #808080;
+      color: $medium-grey;
       font-weight: 700;
       font-size: 14px;
       margin: 0;
     }
 
     .item {
-      color: #808080;
+      color: $medium-grey;
       font-size: 14px;
       margin-top: 5px;
 
       &:hover {
-        color: #404040;
+        color: $darker-grey;
       }
 
       &.active {
-        color: #53C2E0;
+        color: $blue;
       }
     }
   }
@@ -145,13 +148,19 @@ export default {
 
 .right-sidebar {
   width: 300px;
-  background: #fafafa;
-  border-left: 1px solid #dedede;
+  background: $lightest-grey;
+  border-left: 1px solid $light-grey;
 }
 
-.bottom-panel {
-  height: 300px;
-  background: #fafafa;
-  border-top: 1px solid #dedede;
+.footer {
+  background: $light-grey;
+  color: $medium-grey;
+  font-size: 12px;
+  padding: 15px;
+  text-align: right;
+
+  .heart {
+    color: $red;
+  }
 }
 </style>
