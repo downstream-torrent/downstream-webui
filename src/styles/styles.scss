@@ -1,0 +1,14 @@
+// Mixins
+@mixin box-sizing () {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+// Default Styling
+html, body {
+  font-family: 'Noto Sans', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
