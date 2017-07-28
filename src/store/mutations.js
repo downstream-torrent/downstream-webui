@@ -5,7 +5,21 @@ export default {
   SOCKET_DISCONNECT (state) {
     state.connect = false
   },
-  SOCKET_LIST (state, { list }) {
-    state.list = list
+  SOCKET_TORRENT_LIST (state, torrents) {
+    state.torrents = torrents
+  },
+  SOCKET_TORRENT_ADDED (state, torrent) {
+    state.torrents.push(torrent)
+  },
+  SOCKET_TORRENT_REMOVED (state, torrent) {
+    state.torrents = state.torrents.filter(t => t.infoHash !== torrent.infoHash)
+  },
+  SOCKET_TORRENT_DOWNLOAD (state, torrent) {
+    state.torrents = state.torrents.map(t => {
+      if (t.infoHash === torrent.infoHash) {
+        return torrent
+      }
+      return t
+    })
   }
 }

@@ -4,4 +4,8 @@ import socketio from 'socket.io-client'
 
 import store from '../store'
 
-Vue.use(VueSocketio, socketio('http://localhost:9001'), store)
+const socket = socketio('http://localhost:9001')
+
+Vue.use(VueSocketio, socket, store)
+
+export default socket

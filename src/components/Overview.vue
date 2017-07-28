@@ -32,7 +32,23 @@
         </div>
       </div>
       <div class="main">
-        {{$store.state.connect}}
+        <div class="table">
+          <div class="row table-header">
+            <td class="cell name">Name</td>
+            <td class="cell">Size</td>
+            <td class="cell">Progress</td>
+            <td class="cell"><i class="fa fa-arrow-down"></i> Speed</td>
+            <td class="cell"><i class="fa fa-arrow-up"></i> Speed</td>
+          </div>
+
+          <div class="row" v-for="torrent in torrents">
+            <div class="cell name">{{torrent.name}}</div>
+            <div class="cell">{{torrent.length}}</div>
+            <div class="cell">{{torrent.progress}}</div>
+            <div class="cell">{{torrent.downloadSpeed}}</div>
+            <div class="cell">{{torrent.uploadSpeed}}</div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="footer">
@@ -43,7 +59,12 @@
 
 <script>
 export default {
-  name: 'overview'
+  name: 'overview',
+  computed: {
+    torrents () {
+      return this.$store.getters.torrents
+    }
+  }
 }
 </script>
 
@@ -68,7 +89,7 @@ export default {
   .title {
     width: 180px;
     color: $medium-grey;
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 400;
     line-height: 30px;
     margin: 0;
@@ -77,19 +98,19 @@ export default {
 
   .left-toolbar {
     flex-grow: 1;
-    padding: 15px;
+    padding: 10px;
   }
 
   .right-toolbar {
-    padding: 15px;
+    padding: 10px;
   }
 
   button {
-    height: 30px;
-    padding: 0 15px;
+    height: 40px;
+    padding: 0 20px;
     background: $lightest-grey;
     color: $dark-grey;
-    font-size: 12px;
+    font-size: 16px;
     border: 1px solid $light-grey;
     border-radius: 5px;
     outline: none;
@@ -113,6 +134,7 @@ export default {
 .left-sidebar {
   width: 180px;
   background: $lightest-grey;
+  flex-shrink: 0;
   border-right: 1px solid $light-grey;
   padding: 15px;
 
@@ -122,13 +144,13 @@ export default {
     .section-title {
       color: $medium-grey;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 18px;
       margin: 0;
     }
 
     .item {
       color: $medium-grey;
-      font-size: 14px;
+      font-size: 16px;
       margin-top: 5px;
 
       &:hover {
@@ -144,6 +166,30 @@ export default {
 
 .main {
   flex-grow: 1;
+
+  .row {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid $lighter-grey;
+
+    &:nth-child(odd) {
+      background: $lightest-grey;
+    }
+
+    &.table-header {
+      font-weight: 700;
+    }
+
+    .cell {
+      flex-grow: 1;
+      width: 100%;
+      color: $medium-grey;
+      padding: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
 
 .right-sidebar {
