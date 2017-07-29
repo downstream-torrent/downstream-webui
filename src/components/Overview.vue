@@ -6,12 +6,12 @@
         <div class="section">
           <h2 class="section-title">Torrent Status</h2>
           <div class="item active"><i class="fa fa-circle-o"></i> All ({{torrents.length}})</div>
-          <div class="item"><i class="fa fa-arrow-circle-o-down"></i> Downloading ({{statuses.downloading}})</div>
-          <div class="item"><i class="fa fa-arrow-circle-o-up"></i> Seeding ({{statuses.seeding}})</div>
-          <div class="item"><i class="fa fa-check-circle-o"></i> Complete ({{statuses.complete}})</div>
-          <div class="item"><i class="fa fa-pause-circle-o"></i> Paused ({{statuses.paused}})</div>
-          <div class="item"><i class="fa fa-stop-circle-o"></i> Stalled ({{statuses.stalled}})</div>
-          <div class="item"><i class="fa fa-times-circle-o"></i> Error ({{statuses.error}})</div>
+          <div class="item" v-if="statuses.downloading"><i class="fa fa-arrow-circle-o-down"></i> Downloading ({{statuses.downloading}})</div>
+          <div class="item" v-if="statuses.seeding"><i class="fa fa-arrow-circle-o-up"></i> Seeding ({{statuses.seeding}})</div>
+          <div class="item" v-if="statuses.complete"><i class="fa fa-check-circle-o"></i> Complete ({{statuses.complete}})</div>
+          <div class="item" v-if="statuses.paused"><i class="fa fa-pause-circle-o"></i> Paused ({{statuses.paused}})</div>
+          <div class="item" v-if="statuses.stalled"><i class="fa fa-stop-circle-o"></i> Stalled ({{statuses.stalled}})</div>
+          <div class="item" v-if="statuses.error"><i class="fa fa-times-circle-o"></i> Error ({{statuses.error}})</div>
         </div>
         <div class="section">
           <h2 class="section-title">Trackers</h2>
