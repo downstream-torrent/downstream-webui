@@ -42,14 +42,13 @@
         </div>
       </div>
     </div>
-    <div class="footer">
-      <span>Made with <i class="fa fa-heart heart"></i> by Brendan Goodenough</span>
-    </div>
+    <footer-component></footer-component>
   </div>
 </template>
 
 <script>
 import HeaderComponent from '@/components/HeaderComponent'
+import FooterComponent from '@/components/FooterComponent'
 
 function select (torrent) {
   this.selected = Object.assign({}, this.selected, {
@@ -60,7 +59,8 @@ function select (torrent) {
 export default {
   name: 'overview',
   components: {
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   },
   computed: {
     torrents () {
@@ -171,25 +171,6 @@ export default {
         flex-shrink: 0;
       }
     }
-  }
-}
-
-.right-sidebar {
-  width: 300px;
-  background: $lightest-grey;
-  border-left: 1px solid $light-grey;
-}
-
-.footer {
-  background: $lightest-grey;
-  color: $medium-grey;
-  font-size: 12px;
-  padding: 15px;
-  text-align: center;
-  border-top: 1px solid $light-grey;
-
-  .heart {
-    color: $red;
   }
 }
 </style>
