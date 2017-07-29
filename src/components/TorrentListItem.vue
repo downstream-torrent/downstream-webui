@@ -2,7 +2,7 @@
   <div class="row torrent-list-item" @click="select(torrent)" :class="{ selected: selected[torrent.infoHash] }">
     <div class="cell large">{{torrent.name}}</div>
     <div class="cell small">{{torrent.length}}</div>
-    <div class="cell small">{{torrent.progress}}</div>
+    <div class="cell small"><progress-bar :progress="torrent.progress"></progress-bar></div>
     <div class="cell small">{{torrent.downloadSpeed}}</div>
     <div class="cell small">{{torrent.uploadSpeed}}</div>
     <div class="cell small">{{torrent.timeRemaining}}</div>
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import ProgressBar from '@/components/ProgressBar'
+
 function select (torrent) {
   this.selected = Object.assign({}, this.selected, {
     [torrent.infoHash]: !this.selected[torrent.infoHash]
@@ -19,6 +21,9 @@ function select (torrent) {
 
 export default {
   name: 'torrent-list-item',
+  components: {
+    ProgressBar
+  },
   props: ['torrent'],
   data: () => ({
     selected: {}

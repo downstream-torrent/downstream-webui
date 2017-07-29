@@ -29,12 +29,6 @@ import HeaderComponent from '@/components/HeaderComponent'
 import TorrentList from '@/components/TorrentList'
 import FooterComponent from '@/components/FooterComponent'
 
-function select (torrent) {
-  this.selected = Object.assign({}, this.selected, {
-    [torrent.infoHash]: !this.selected[torrent.infoHash]
-  })
-}
-
 export default {
   name: 'overview',
   components: {
@@ -46,12 +40,6 @@ export default {
     torrents () {
       return this.$store.getters.torrents
     }
-  },
-  data: () => ({
-    selected: {}
-  }),
-  methods: {
-    select
   }
 }
 </script>
