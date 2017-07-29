@@ -9,7 +9,11 @@ export default {
     state.torrents = torrents
   },
   SOCKET_TORRENT_ADDED (state, torrent) {
-    state.torrents.push(torrent)
+    if (!state.torrents.find(t => t.infoHash === torrent.infoHash)) {
+      state.torrents.push(torrent)
+    } else {
+      state.torrents = state.torrents.map(t => t.infoHash === torrent.infoHash ? torrent : t)
+    }
   },
   SOCKET_TORRENT_REMOVED (state, torrent) {
     state.torrents = state.torrents.filter(t => t.infoHash !== torrent.infoHash)

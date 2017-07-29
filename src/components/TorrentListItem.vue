@@ -1,5 +1,6 @@
 <template>
   <div class="row torrent-list-item" @click="select(torrent)" :class="{ selected: selected[torrent.infoHash] }">
+    <div class="cell tiny">{{torrent.queuePosition}}</div>
     <div class="cell large">{{torrent.name}}</div>
     <div class="cell small">{{torrent.length}}</div>
     <div class="cell small"><progress-bar :progress="torrent.progress"></progress-bar></div>
@@ -38,12 +39,8 @@ export default {
 @import '../styles/styles.scss';
 
 .torrent-list-item {
-  &:nth-child(odd) {
-    background: $lightest-grey;
-  }
-
   &.selected {
-    background: $lighter-grey
+    background: $lightest-grey
   }
 }
 </style>

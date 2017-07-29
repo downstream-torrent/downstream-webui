@@ -46,10 +46,18 @@ html, body {
   &.large {
     width: 300px;
     flex-shrink: 0.1;
+    text-align: left;
   }
 
   &.small {
     width: 120px;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  &.tiny {
+    width: 30px;
+    flex-grow: 0;
     flex-shrink: 0;
   }
 }
