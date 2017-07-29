@@ -18,10 +18,7 @@ export default {
   SOCKET_TORRENT_REMOVED (state, torrent) {
     state.torrents = state.torrents.filter(t => t.infoHash !== torrent.infoHash)
   },
-  SOCKET_TORRENT_DOWNLOAD (state, torrent) {
-    state.torrents = state.torrents.map(t => t.infoHash === torrent.infoHash ? torrent : t)
-  },
-  SOCKET_TORRENT_UPLOAD (state, torrent) {
+  SOCKET_TORRENT_UPDATE (state, torrent) {
     state.torrents = state.torrents.map(t => t.infoHash === torrent.infoHash ? torrent : t)
   }
 }
