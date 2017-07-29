@@ -7,7 +7,9 @@ $lightish-grey: #a0a0a0;
 $medium-grey: #808080;
 $dark-grey: #606060;
 $darker-grey: #404040;
+
 $blue: #53c2e0;
+$light-blue: #e1f2f7;
 $red: #eb4d82;
 $green: #6fde7c;
 
@@ -28,7 +30,32 @@ html, body {
 
 .row {
   display: flex;
-  border-bottom: 1px solid $lighter-grey;
+  border-top: 1px solid $lighter-grey;
+
+  &.selected {
+    background: $light-blue;
+    border-top: 1px solid darken($light-blue, 5%);
+
+    .cell:not(:last-child) {
+      border-right: 1px solid darken($light-blue, 5%);
+    }
+  }
+
+  &.selected + .row {
+    border-top: 1px solid darken($light-blue, 5%);
+  }
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid $lighter-grey;
+
+    &.selected {
+      border-bottom: 1px solid darken($light-blue, 5%);
+    }
+  }
 }
 
 .cell {
@@ -59,5 +86,9 @@ html, body {
     width: 30px;
     flex-grow: 0;
     flex-shrink: 0;
+  }
+
+  &:last-child {
+    border-right: none;
   }
 }

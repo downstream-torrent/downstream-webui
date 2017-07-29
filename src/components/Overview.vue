@@ -29,12 +29,27 @@ import HeaderComponent from '@/components/HeaderComponent'
 import TorrentList from '@/components/TorrentList'
 import FooterComponent from '@/components/FooterComponent'
 
+function onPaste (e) {
+  e.clipboardData.getData('text').split('\n').forEach(id => {
+    if (id !== '') {
+      this.$store.dispatch('add_torrent', id)
+    }
+  })
+}
+
 export default {
   name: 'overview',
   components: {
     HeaderComponent,
     TorrentList,
     FooterComponent
+  },
+  created: function () {
+    this.onPaste = onPaste.bind(this)
+    document.addEventListener('paste', this.onPaste)
+  },
+  destroyed: function () {
+    document.removeEventListener('paste', this.onPaste)
   },
   computed: {
     torrents () {

@@ -1,5 +1,5 @@
 <template>
-  <div class="row torrent-list-item" @click="select(torrent)" :class="{ selected: selected[torrent.infoHash] }">
+  <div class="row" @click="select(torrent)" :class="{ selected: selected[torrent.infoHash] }">
     <div class="cell tiny">{{torrent.queuePosition}}</div>
     <div class="cell small status">{{torrent.status}}</div>
     <div class="cell large">{{torrent.name}}</div>
@@ -38,13 +38,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '../styles/styles.scss';
-
-.torrent-list-item {
-  &.selected {
-    background: $lightest-grey
-  }
-}
-
 .status {
   text-transform: capitalize;
 }
