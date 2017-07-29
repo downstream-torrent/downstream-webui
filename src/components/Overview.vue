@@ -18,29 +18,7 @@
           <div class="item active"><i class="fa fa-circle-o"></i> All</div>
         </div>
       </div>
-      <div class="main">
-        <div class="table">
-          <div class="row table-header">
-            <div class="cell large">Name</div>
-            <div class="cell small">Size</div>
-            <div class="cell small">Progress</div>
-            <div class="cell small"><i class="fa fa-arrow-down"></i> Speed</div>
-            <div class="cell small"><i class="fa fa-arrow-up"></i> Speed</div>
-            <div class="cell small"><i class="fa fa-clock-o"></i> Remaining</div>
-            <div class="cell small">Ratio</div>
-          </div>
-
-          <div class="row" v-for="torrent in torrents" @click="select(torrent)" :class="{ selected: selected[torrent.infoHash] }">
-            <div class="cell large">{{torrent.name}}</div>
-            <div class="cell small">{{torrent.length}}</div>
-            <div class="cell small">{{torrent.progress}}</div>
-            <div class="cell small">{{torrent.downloadSpeed}}</div>
-            <div class="cell small">{{torrent.uploadSpeed}}</div>
-            <div class="cell small">{{torrent.timeRemaining}}</div>
-            <div class="cell small">{{torrent.ratio}}</div>
-          </div>
-        </div>
-      </div>
+      <torrent-list :torrents="torrents"></torrent-list>
     </div>
     <footer-component></footer-component>
   </div>
@@ -48,6 +26,7 @@
 
 <script>
 import HeaderComponent from '@/components/HeaderComponent'
+import TorrentList from '@/components/TorrentList'
 import FooterComponent from '@/components/FooterComponent'
 
 function select (torrent) {
@@ -60,6 +39,7 @@ export default {
   name: 'overview',
   components: {
     HeaderComponent,
+    TorrentList,
     FooterComponent
   },
   computed: {
@@ -119,56 +99,6 @@ export default {
 
       &.active {
         color: $blue;
-      }
-    }
-  }
-}
-
-.main {
-  display: flex;
-  flex-grow: 1;
-  overflow: auto;
-
-  .table {
-    flex-grow: 1;
-  }
-
-  .row {
-    display: flex;
-    border-bottom: 1px solid $lighter-grey;
-
-    &:nth-child(odd) {
-      background: $lightest-grey;
-    }
-
-    &.table-header {
-      font-weight: 700;
-    }
-
-    &.selected {
-      background: $lighter-grey
-    }
-
-    .cell {
-      flex-grow: 1;
-      width: 100%;
-      color: $medium-grey;
-      padding: 15px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: center;
-      cursor: pointer;
-      border-right: 1px solid $lighter-grey;
-
-      &.large {
-        width: 300px;
-        flex-shrink: 0.1;
-      }
-
-      &.small {
-        width: 120px;
-        flex-shrink: 0;
       }
     }
   }

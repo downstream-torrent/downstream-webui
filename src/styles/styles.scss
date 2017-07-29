@@ -25,3 +25,31 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
 }
+
+.row {
+  display: flex;
+  border-bottom: 1px solid $lighter-grey;
+}
+
+.cell {
+  flex-grow: 1;
+  width: 100%;
+  color: $medium-grey;
+  padding: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  cursor: pointer;
+  border-right: 1px solid $lighter-grey;
+
+  &.large {
+    width: 300px;
+    flex-shrink: 0.1;
+  }
+
+  &.small {
+    width: 120px;
+    flex-shrink: 0;
+  }
+}
