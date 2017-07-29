@@ -5,10 +5,14 @@
       <div class="left-toolbar">
         <button><i class="fa fa-plus"></i></button>
         <button><i class="fa fa-trash"></i></button>
+        <div class="button-separator"></div>
         <button><i class="fa fa-pause"></i></button>
         <button><i class="fa fa-play"></i></button>
         <button><i class="fa fa-arrow-up"></i></button>
         <button><i class="fa fa-arrow-down"></i></button>
+        <div class="button-separator"></div>
+        <button><i class="fa fa-magnet"></i></button>
+        <button><i class="fa fa-tv"></i></button>
       </div>
       <div class="right-toolbar">
         <button><i class="fa fa-cog"></i></button>
@@ -19,8 +23,9 @@
       <div class="left-sidebar">
         <div class="section">
           <h2 class="section-title">Torrent Status</h2>
-          <div class="item active"><i class="fa fa-circle-o"></i> All</div>
+          <div class="item active"><i class="fa fa-circle-o"></i> All ({{torrents.length}})</div>
           <div class="item"><i class="fa fa-arrow-circle-o-down"></i> Downloading</div>
+          <div class="item"><i class="fa fa-arrow-circle-o-up"></i> Seeding</div>
           <div class="item"><i class="fa fa-check-circle-o"></i> Complete</div>
           <div class="item"><i class="fa fa-pause-circle-o"></i> Paused</div>
           <div class="item"><i class="fa fa-stop-circle-o"></i> Stalled</div>
@@ -34,19 +39,23 @@
       <div class="main">
         <div class="table">
           <div class="row table-header">
-            <td class="cell name">Name</td>
-            <td class="cell">Size</td>
-            <td class="cell">Progress</td>
-            <td class="cell"><i class="fa fa-arrow-down"></i> Speed</td>
-            <td class="cell"><i class="fa fa-arrow-up"></i> Speed</td>
+            <div class="cell large">Name</div>
+            <div class="cell small">Size</div>
+            <div class="cell small">Progress</div>
+            <div class="cell small"><i class="fa fa-arrow-down"></i> Speed</div>
+            <div class="cell small"><i class="fa fa-arrow-up"></i> Speed</div>
+            <div class="cell small"><i class="fa fa-clock-o"></i> Remaining</div>
+            <div class="cell small">Ratio</div>
           </div>
 
-          <div class="row" v-for="torrent in torrents">
-            <div class="cell name">{{torrent.name}}</div>
-            <div class="cell">{{torrent.length}}</div>
-            <div class="cell">{{torrent.progress}}</div>
-            <div class="cell">{{torrent.downloadSpeed}}</div>
-            <div class="cell">{{torrent.uploadSpeed}}</div>
+          <div class="row" v-for="torrent in torrents" @click="select(torrent)" :class="{ selected: selected[torrent.infoHash] }">
+            <div class="cell large">{{torrent.name}}</div>
+            <div class="cell small">{{torrent.length}}</div>
+            <div class="cell small">{{torrent.progress}}</div>
+            <div class="cell small">{{torrent.downloadSpeed}}</div>
+            <div class="cell small">{{torrent.uploadSpeed}}</div>
+            <div class="cell small">{{torrent.timeRemaining}}</div>
+            <div class="cell small">{{torrent.ratio}}</div>
           </div>
         </div>
       </div>
@@ -58,12 +67,24 @@
 </template>
 
 <script>
+function select (torrent) {
+  this.selected = Object.assign({}, this.selected, {
+    [torrent.infoHash]: !this.selected[torrent.infoHash]
+  })
+}
+
 export default {
   name: 'overview',
   computed: {
     torrents () {
       return this.$store.getters.torrents
     }
+  },
+  data: () => ({
+    selected: {}
+  }),
+  methods: {
+    select
   }
 }
 </script>
@@ -97,6 +118,7 @@ export default {
   }
 
   .left-toolbar {
+    display: flex;
     flex-grow: 1;
     padding: 10px;
   }
@@ -123,6 +145,10 @@ export default {
     &:hover {
       background: $lighter-grey;
     }
+  }
+
+  .button-separator {
+    margin-left: 15px;
   }
 }
 
@@ -165,10 +191,15 @@ export default {
 }
 
 .main {
+  display: flex;
   flex-grow: 1;
+  overflow: auto;
+
+  .table {
+    flex-grow: 1;
+  }
 
   .row {
-    width: 100%;
     display: flex;
     border-bottom: 1px solid $lighter-grey;
 
@@ -180,6 +211,10 @@ export default {
       font-weight: 700;
     }
 
+    &.selected {
+      background: $lighter-grey
+    }
+
     .cell {
       flex-grow: 1;
       width: 100%;
@@ -188,6 +223,19 @@ export default {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      text-align: center;
+      cursor: pointer;
+      border-right: 1px solid $lighter-grey;
+
+      &.large {
+        width: 300px;
+        flex-shrink: 0.1;
+      }
+
+      &.small {
+        width: 120px;
+        flex-shrink: 0;
+      }
     }
   }
 }
@@ -199,11 +247,12 @@ export default {
 }
 
 .footer {
-  background: $light-grey;
+  background: $lightest-grey;
   color: $medium-grey;
   font-size: 12px;
   padding: 15px;
-  text-align: right;
+  text-align: center;
+  border-top: 1px solid $light-grey;
 
   .heart {
     color: $red;

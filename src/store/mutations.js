@@ -15,11 +15,9 @@ export default {
     state.torrents = state.torrents.filter(t => t.infoHash !== torrent.infoHash)
   },
   SOCKET_TORRENT_DOWNLOAD (state, torrent) {
-    state.torrents = state.torrents.map(t => {
-      if (t.infoHash === torrent.infoHash) {
-        return torrent
-      }
-      return t
-    })
+    state.torrents = state.torrents.map(t => t.infoHash === torrent.infoHash ? torrent : t)
+  },
+  SOCKET_TORRENT_UPLOAD (state, torrent) {
+    state.torrents = state.torrents.map(t => t.infoHash === torrent.infoHash ? torrent : t)
   }
 }
