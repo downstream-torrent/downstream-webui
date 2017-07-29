@@ -6,12 +6,12 @@
         <div class="section">
           <h2 class="section-title">Torrent Status</h2>
           <div class="item active"><i class="fa fa-circle-o"></i> All ({{torrents.length}})</div>
-          <div class="item"><i class="fa fa-arrow-circle-o-down"></i> Downloading</div>
-          <div class="item"><i class="fa fa-arrow-circle-o-up"></i> Seeding</div>
-          <div class="item"><i class="fa fa-check-circle-o"></i> Complete</div>
-          <div class="item"><i class="fa fa-pause-circle-o"></i> Paused</div>
-          <div class="item"><i class="fa fa-stop-circle-o"></i> Stalled</div>
-          <div class="item"><i class="fa fa-times-circle-o"></i> Error</div>
+          <div class="item"><i class="fa fa-arrow-circle-o-down"></i> Downloading ({{statuses.downloading}})</div>
+          <div class="item"><i class="fa fa-arrow-circle-o-up"></i> Seeding ({{statuses.seeding}})</div>
+          <div class="item"><i class="fa fa-check-circle-o"></i> Complete ({{statuses.complete}})</div>
+          <div class="item"><i class="fa fa-pause-circle-o"></i> Paused ({{statuses.paused}})</div>
+          <div class="item"><i class="fa fa-stop-circle-o"></i> Stalled ({{statuses.stalled}})</div>
+          <div class="item"><i class="fa fa-times-circle-o"></i> Error ({{statuses.error}})</div>
         </div>
         <div class="section">
           <h2 class="section-title">Trackers</h2>
@@ -39,6 +39,24 @@ export default {
   computed: {
     torrents () {
       return this.$store.getters.torrents
+    },
+    statuses () {
+      const statuses = {
+        downloading: 0,
+        seeding: 0,
+        complete: 0,
+        paused: 0,
+        stalled: 0,
+        error: 0
+      }
+
+      this.$store.getters.torrents.forEach(torrent => {
+        if (statuses[torrent.status] >= 0) {
+          statuses[torrent.status] += 1
+        }
+      })
+
+      return statuses
     }
   }
 }

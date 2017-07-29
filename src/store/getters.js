@@ -12,6 +12,7 @@ export default {
       uploadSpeed: `${bytes(torrent.uploadSpeed)}/s`,
       timeRemaining: moment(torrent.timeRemaining).isValid() ? moment.utc(torrent.timeRemaining).format('HH:mm:ss') : 'Unknown',
       ratio: torrent.ratio.toFixed(2),
+      status: torrent.status,
       queuePosition: torrent.queuePosition
     }))
   }

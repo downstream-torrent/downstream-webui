@@ -1,6 +1,7 @@
 <template>
   <div class="row torrent-list-header">
     <div class="cell tiny">#</div>
+    <div class="cell small">Status</div>
     <div class="cell large">Name</div>
     <div class="cell small">Size</div>
     <div class="cell small">Progress</div>
