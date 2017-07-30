@@ -69,13 +69,14 @@ export default {
   @include box-sizing;
 
   .title {
-    width: 180px;
+    width: 200px;
     color: $medium-grey;
     font-size: 24px;
     font-weight: 400;
     line-height: 30px;
     margin: 0;
     padding: 15px;
+    @include box-sizing;
   }
 
   .left-toolbar {

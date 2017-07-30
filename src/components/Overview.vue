@@ -126,12 +126,11 @@ export default {
     }
 
     .item {
-      height: 50px;
       color: $medium-grey;
       font-size: 16px;
-      padding: 0 15px;
+      padding: 15px;
       cursor: pointer;
-      line-height: 50px;
+      border-top: 1px solid $lightest-grey;
 
       i {
         font-size: 18px;
@@ -139,8 +138,16 @@ export default {
       }
 
       &.active {
-        color: $darker-grey;
-        background: $light-grey;
+        background: $lighter-grey;
+        border-top: 1px solid $light-grey;
+      }
+
+      &.active + .item {
+        border-top: 1px solid $light-grey;
+      }
+
+      &.active:last-child {
+        border-bottom: 1px solid $light-grey;
       }
     }
   }
